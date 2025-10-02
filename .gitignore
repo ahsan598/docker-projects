@@ -1,16 +1,16 @@
-# Docker related
+# ===== Docker & Git =====
 docker-data/
 *.pid
+*.tar
+*.img
+docker-compose.override.yml
+.git/
+.gitconfig
 
-# Editor/IDE files
+# ===== IDEs =====
 .vscode/
 .idea/
 
-# AWS credentials (never commit these!)
-.aws/
-*.pem
-*.key
-*.pub
-*.crt
-*.cer
-*.cert
+# ===== Logs & Git =====
+*.log
+*.tmp
