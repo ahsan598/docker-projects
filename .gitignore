@@ -1,0 +1,13 @@
+# Docker related
+docker-data/
+*.pid
+
+# Editor/IDE files
+.vscode/
+.idea/
+
+# Ignore AWS credentials
+*.pem
+*.key
+.env
+.aws/
