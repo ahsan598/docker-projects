@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  apache:
+    image: httpd:latest
+    ports:
+      - "91:80"
+    volumes:
+      - ./apache-site:/usr/local/apache2/htdocs
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "92:80"
+    volumes:
+      - ./nginx-site:/usr/share/nginx/html

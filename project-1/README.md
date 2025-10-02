@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="40"/> Deploy a Website in Docker Apache Container
+# Deploy a Website in Docker Apache Container
 
 
 ### 🎯 Objective
