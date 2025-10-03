@@ -1,6 +1,6 @@
 #!/bin/bash
 # ===================================================
-# Docker Latest Installation Script for Ubuntu
+# Docker Installation Script for Ubuntu Instances
 # Compatible with Ubuntu 20.04, 22.04, 24.04
 # ===================================================
 
@@ -36,3 +36,17 @@ sudo apt-get install -y \
     containerd.io \
     docker-buildx-plugin \
     docker-compose-plugin
+
+# Enable and start Docker service
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# Optional: Allow non-root user to run docker without sudo
+# sudo groupadd docker                # Only needed if 'docker' group doesn't exist
+# sudo usermod -aG docker $USER       # Add your user to the docker group.
+# newgrp docker                       # To apply group changes
+
+# Verify Docker installation
+echo "Verifying Docker installation..."
+sudo docker run hello-world
+echo "Docker installation completed successfully!"

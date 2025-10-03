@@ -92,14 +92,3 @@ sudo docker system prune
 # Aggressive cleanup: remove all unused containers, networks, images, volumes
 sudo docker system prune -a --volumes
 ```
-
----
-
-### Optional: Allow non-root user to run docker without sudo
-
-```sh
-sudo groupadd docker                # Only needed if 'docker' group doesn't exist
-sudo usermod -aG docker $USER       # Add your user to the docker group.
-newgrp docker                       # To apply group changes
-docker run hello-world              # Verify that you can run docker commands without sudo
-```
