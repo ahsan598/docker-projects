@@ -1,15 +1,16 @@
-version: '3.8'
+version: '3.9'                                      # Compose file format version
 services:
   apache:
-    image: httpd:latest
+    image: httpd:latest                             # Apache HTTP Server image
+    container_name: apache_server                   # Container name
     ports:
-      - "91:80"
+      - "91:80"                                     # Host port 91 → Container port 80
     volumes:
-      - ./apache-site:/usr/local/apache2/htdocs
-
+      - ./apache-data:/usr/local/apache2/htdocs     # Bind mount for Apache content
   nginx:
-    image: nginx:latest
+    image: nginx:latest                             # Nginx Server image
+    container_name: nginx_server                    # Container name
     ports:
-      - "92:80"
+      - "92:80"                                     # Host port 92 → Container port 80
     volumes:
-      - ./nginx-site:/usr/share/nginx/html
+      - ./nginx-data:/usr/share/nginx/html          # Bind mount for Nginx content
