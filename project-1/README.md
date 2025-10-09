@@ -1,17 +1,17 @@
 # Deploy a Website in Docker Apache Container
 
-
-### 🎯 Objective
+## Objective
 The goal of this project is to deploy a custom website inside a Docker Apache container.
 We will also demonstrate how dynamic content changes can be achieved by using Bind Mount, so that changes made on the host machine are instantly reflected inside the container without rebuilding it.
 
-### 🛠️ Prerequisites
+
+## Prerequisites
 - Ubuntu instance running on AWS (or any Linux machine)
 
-### ⚙️ Steps to Implement:
 
-**1️⃣ Install Docker** 
+## Steps to Implement:
 
+### Step-1: Install Docker
 - Create a bash script (install-docker.sh) with the following content:
 ```sh
 #!/bin/bash
@@ -29,18 +29,25 @@ sudo apt-get install -y \
 
 # Setup Docker official GPG key
 sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 # Add Docker repository to APT sources
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   
 # Update again & install Docker Engine
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+```
+
+- Verify Docker installation
+```sh
+echo "Verifying Docker installation..."
+sudo docker run hello-world
+echo "Docker installation completed successfully!"
 ```
 
 - Execute the script to install Docker
@@ -57,7 +64,7 @@ sudo systemctl status docker --no-pager
 **If status shows active (running) → Docker is successfully installed ✅**
 
 
-**2️⃣ Download Apache Docker Image**
+### Step-2: Download Apache Docker Image
 ```sh
 # Pull Apache (httpd) Docker Image
 sudo docker pull httpd:latest
@@ -66,7 +73,7 @@ sudo docker pull httpd:latest
 sudo docker images
 ```
 
-**3️⃣ Prepare Host Directory for Website**
+### Step-3: Prepare Host Directory for Website
 ```sh
 # Create a directory on the host for your custom site:
 mkdir -p /home/ubuntu/data
@@ -75,7 +82,7 @@ mkdir -p /home/ubuntu/data
 echo "<h1>Hello from Apache in Docker!</h1>" > /home/ubuntu/data/index.html
 ```
 
-**4️⃣ Run Apache Container with Bind Mount**
+### Step-4: Run Apache Container with Bind Mount
 ```sh
 # Running apache container with bind mount
 sudo docker container run -d \
@@ -99,14 +106,14 @@ sudo docker ps
 - `httpd:latest` → Apache HTTP server image
 
 
-**5️⃣ Access Website**
+### Step-5: Access Website
 ```sh
 # Open Browser
 http://<AWS_PUBLIC_IP>:8080
 ```
 **You should see your custom website running inside the container 🎉**
 
-**6️⃣ Test Dynamic Content Update**
+### Step-6: Test Dynamic Content Update
 ```sh
 # Modify your website files on the host:
 echo "<h1>Updated Website Content 🚀</h1>" > /home/ubuntu/data/index.html
@@ -115,9 +122,8 @@ Refresh the browser → Updated content will instantly reflect inside the contai
 
 This proves Bind Mount keeps host and container files in sync in real-time.
 
----
 
-### 📂 Volume vs Bind Mount
+## Volume vs Bind Mount
 | Feature     | Bind Mount                               | Docker Volume                             |
 | ----------- | ---------------------------------------- | ----------------------------------------- |
 | Location    | Any path on host filesystem              | Managed by Docker (`/var/lib/docker/...`) |
@@ -127,7 +133,8 @@ This proves Bind Mount keeps host and container files in sync in real-time.
 
 **In this project → Bind Mount is used to dynamically update website files.**
 
-### 📌 Useful Docker Commands
+
+## Useful Docker Commands
 ```sh
 # List running containers
 sudo docker ps
@@ -145,7 +152,7 @@ sudo docker stop apache && docker rm apache
 sudo docker rmi httpd:latest
 ```
 
-### ✅ Outcome
+## Outcome
 - Successfully deployed a website in a Docker **Apache** container
 - Achieved dynamic updates without rebuilding container using **Bind Mount**
 - Learned difference between **Bind Mount** vs **Volume**

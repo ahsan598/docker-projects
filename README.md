@@ -1,6 +1,6 @@
 # 🐳 Docker Projects
 
-This repository contains multiple Docker-based projects for learning and demonstrating containerization of applications and services. Includes multi-container setups with Docker Compose for managing web servers, databases, and application stacks.
+This repository contains multiple docker-based projects for learning and demonstrating containerization of applications and services. Includes multi-container setups with docker compose for managing web servers, databases, and application stacks.
 
 ### 📂 Projects Included
 - [Project 1: Deploy a Website in Docker Apache Container](/project-1/)
@@ -10,4 +10,4 @@ This repository contains multiple Docker-based projects for learning and demonst
 
 
 ### Docker Commands
-You can access basic Docker commands from [here](/commands.md).
+You can access basic docker commands from [here](/commands.md).
