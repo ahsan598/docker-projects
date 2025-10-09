@@ -1,6 +1,6 @@
 # Deploy Apache & Nginx Containers using Docker Compose
 
-### 🎯 Objective
+## Objective
 In this project, we will use **Docker Compose** to deploy two web servers — **Apache (httpd)** and **Nginx** — running as separate containers on the same host machine.
 
 Each container will be exposed on a different port:
@@ -10,24 +10,24 @@ Each container will be exposed on a different port:
 This setup demonstrates how **multiple services** can be managed together using a single configuration file (`docker-compose.yml`).
 
 
-### 🛠️ Prerequisites
+## Prerequisites
 - Docker and Docker Compose installed
 - Basic understanding of YAML syntax
 - Ubuntu system (local or AWS instance)
 
 
-### ⚙️ Steps to Implement
+## Steps to Implement
 
-**Step-1: Install Docker & Docker Compose**
-- If Docker is not installed, use your previous installation script (`install-docker.sh`) with **Docker Compose plugin**.
+### Step-1: Install Docker & Docker Compose
+- If Docker is not installed, use previous installation script (`install-docker.sh`) with **Docker Compose plugin**.
 - Verify compose version by running below command
 ```sh
 docker compose version
 ```
 
-**Step-2 Create `docker-compose.yml` File**
+### Step-2: Create `docker-compose.yml` File
 ```sh
-version: '3.9'   # Compose file format version
+version: '3.9'                              # Compose file format version
 
 services:
   apache:
@@ -47,7 +47,7 @@ services:
       - ./nginx-data:/usr/share/nginx/html  # Bind mount for Nginx content
 ```
 
-**Step-3: Deploy Both Containers**
+### Step-3: Deploy Both Containers
 - Run the following command in the same directory as your `docker-compose.yml`
 ```sh
 docker compose up -d
@@ -58,7 +58,7 @@ docker compose up -d
 - Create and start both containers
 - Map ports 91 and 92 to the host
 
-**Step-4: Verify the Deployment**
+### Step-4: Verify the Deployment
 - Check running container:
 ```sh
 docker ps
@@ -68,7 +68,8 @@ docker ps
   - Nginx → http://<HOST_IP>:92
 - You should see their respective messages.
 
-### Manage Containers via Docker Compose
+
+## Manage Containers via Docker Compose
 ```sh
 # Stop all containers
 docker compose down
@@ -83,7 +84,7 @@ docker compose logs
 docker compose up --build -d
 ```
 
-### Concept Highlight: Docker Compose
+## Concept Highlight: Docker Compose
 | Feature                | Description                                             |
 | ---------------------- | ------------------------------------------------------- |
 | **Single Config File** | Manages multiple containers declaratively using YAML    |
@@ -92,7 +93,7 @@ docker compose up --build -d
 | **Ease of Management** | Start/stop all containers together with simple commands |
 
 
-### Outcome
+## Outcome
 - Two web servers deployed using a **single Docker Compose file**
 - Apache served content on **Port 91**
 - Nginx served content on **Port 92**

@@ -40,7 +40,7 @@ echo \
   
 # Update again & install Docker Engine
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin-y
 ```
 
 - Execute the script to install Docker
