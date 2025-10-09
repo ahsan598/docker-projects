@@ -45,9 +45,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 - Verify Docker installation
 ```sh
-echo "Verifying Docker installation..."
 sudo docker run hello-world
-echo "Docker installation completed successfully!"
 ```
 
 - Execute the script to install Docker
