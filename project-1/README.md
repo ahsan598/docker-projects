@@ -43,11 +43,6 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 ```
 
-- Verify Docker installation
-```sh
-sudo docker run hello-world
-```
-
 - Execute the script to install Docker
 ```sh
 # Make the script executable
@@ -56,8 +51,11 @@ sudo chmod +x install-docker.sh
 # Run the script
 ./install-docker.sh
 
-#Verify installation
+# Verify installation
 sudo systemctl status docker --no-pager
+
+# Verify by running the hello-world image
+sudo docker run hello-world
 ```
 **If status shows active (running) → Docker is successfully installed ✅**
 
