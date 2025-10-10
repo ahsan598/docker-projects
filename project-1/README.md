@@ -84,12 +84,12 @@ To access your Dockerized Apache website running on an AWS EC2 instance, make su
 **Note:**
 - In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
 - That means the browser will access your site on port 8080 — not 80.
-- You can change this mapping if you prefer direct port 80 access (see below).
+- You can change this mapping if you prefer direct port 80 access.
 
 
 ### Step-6: Access Website
 - Open browser:
-  - Apache → http://<HOST_IP>:8080
+  - Apache → http://<AWS_PUBLIC_IP>:8080
 
 **You should see your custom website running inside the container 🎉**
 
@@ -100,9 +100,8 @@ To access your Dockerized Apache website running on an AWS EC2 instance, make su
 # Modify your website files on the host:
 echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
 ```
-Refresh the browser → Updated content will instantly reflect inside the container.
-
-This proves Bind Mount keeps host and container files in sync in real-time.
+- Refresh the browser → Updated content will instantly reflect inside the container.
+- This proves Bind Mount keeps host and container files in sync in real-time.
 
 
 ## Volume vs Bind Mount

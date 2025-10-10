@@ -43,17 +43,17 @@ sudo docker ps
 
 ### Step-4: AWS Security Group Configuration (for Apache + Nginx Compose Project)
 **Inbound Rules to Add**
-| Type       | Protocol | Port Range | Source                                     | Description                 |
-| ---------- | -------- | ---------- | ------------------------------------------ | --------------------------- |
-| SSH        | TCP      | 22         | *Your Public IP* (e.g., `203.0.113.25/32`) | To connect via SSH          |
-| Custom TCP | TCP      | 91         | 0.0.0.0/0                                  | Apache container web access |
-| Custom TCP | TCP      | 92         | 0.0.0.0/0                                  | Nginx container web access  |
+| Type       | Protocol | Port Range | Source              | Description                 |
+| ---------- | -------- | ---------- | --------------------| --------------------------- |
+| SSH        | TCP      | 22         | *Your Public IP*    | To connect via SSH          |
+| Custom TCP | TCP      | 91         | 0.0.0.0/0           | Apache container web access |
+| Custom TCP | TCP      | 92         | 0.0.0.0/0           | Nginx container web access  |
 
 
 ### Step-5: Access Website
 - Open browser:
-  - Apache → http://<HOST_IP>:91
-  - Nginx → http://<HOST_IP>:92
+  - Apache → http://<AWS_PUBLIC_IP>:91
+  - Nginx → http://<AWS_PUBLIC_IP>:92
 - You should see their respective messages.
 
 
