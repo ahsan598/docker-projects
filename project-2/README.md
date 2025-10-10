@@ -26,44 +26,32 @@ docker compose version
 ```
 
 ### Step-2: Create `docker-compose.yml` File
-```sh
-version: '3.9'                              # Compose file format version
-
-services:
-  apache:
-    image: httpd:latest                     # Apache HTTP Server image
-    container_name: apache_server           # Container name
-    ports:
-      - "91:80"                             # Host port 91 → Container port 80
-    volumes:
-      - ./apache-data:/usr/local/apache2/htdocs  # Bind mount for Apache content
-
-  nginx:
-    image: nginx:latest                     # Nginx Server image
-    container_name: nginx_server            # Container name
-    ports:
-      - "92:80"                             # Host port 92 → Container port 80
-    volumes:
-      - ./nginx-data:/usr/share/nginx/html  # Bind mount for Nginx content
-```
+A `docker-compose.yml` file is provided in the project to deploy Apache and Nginx containers with custom ports and bind mounts.
 
 ### Step-3: Deploy Both Containers
 - Run the following command in the same directory as your `docker-compose.yml`
 ```sh
 docker compose up -d
-```
 
+# Verify container is running:
+sudo docker ps
+```
 **This will:**
 - Pull both images (httpd, nginx)
 - Create and start both containers
 - Map ports 91 and 92 to the host
 
-### Step-4: Verify the Deployment
-- Check running container:
-```sh
-docker ps
-```
-- Access in browser:
+### Step-4: AWS Security Group Configuration (for Apache + Nginx Compose Project)
+**Inbound Rules to Add**
+| Type       | Protocol | Port Range | Source                                     | Description                 |
+| ---------- | -------- | ---------- | ------------------------------------------ | --------------------------- |
+| SSH        | TCP      | 22         | *Your Public IP* (e.g., `203.0.113.25/32`) | To connect via SSH          |
+| Custom TCP | TCP      | 91         | 0.0.0.0/0                                  | Apache container web access |
+| Custom TCP | TCP      | 92         | 0.0.0.0/0                                  | Nginx container web access  |
+
+
+### Step-5: Access Website
+- Open browser:
   - Apache → http://<HOST_IP>:91
   - Nginx → http://<HOST_IP>:92
 - You should see their respective messages.

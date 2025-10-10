@@ -1,4 +1,4 @@
-version: '3.9'                                      # Compose file format version
+version: '3.8'                                      # Compose file format version
 services:
   apache:
     image: httpd:latest                             # Apache HTTP Server image

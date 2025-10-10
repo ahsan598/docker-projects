@@ -12,36 +12,7 @@ We will also demonstrate how dynamic content changes can be achieved by using Bi
 ## Steps to Implement:
 
 ### Step-1: Install Docker
-- Create a bash script (install-docker.sh) with the following content:
-```sh
-#!/bin/bash
-
-# Update package index
-sudo apt-get update
-
-# Install required dependencies
-sudo apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release \
-    software-properties-common
-
-# Setup Docker official GPG key
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add Docker repository to APT sources
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  
-# Update again & install Docker Engine
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin-y
-```
+- A bash script `install-docker.sh` is provided in the project to automate Docker installation on Ubuntu.
 
 - Execute the script to install Docker
 ```sh
@@ -75,7 +46,7 @@ sudo docker images
 mkdir -p /home/ubuntu/data
 
 # Add an index.html file (Apache serves this by default):
-echo "<h1>Hello from Apache in Docker!</h1>" > /home/ubuntu/data/index.html
+echo '<h1>Hello from Apache in Docker!</h1>' > /home/ubuntu/data/index.html
 ```
 
 ### Step-4: Run Apache Container with Bind Mount
@@ -102,17 +73,32 @@ sudo docker ps
 - `httpd:latest` → Apache HTTP server image
 
 
-### Step-5: Access Website
-```sh
-# Open Browser
-http://<AWS_PUBLIC_IP>:8080
-```
+### Step-5: AWS Security Group Configuration
+To access your Dockerized Apache website running on an AWS EC2 instance, make sure your Security Group allows the correct inbound traffic.
+**Inbound Rules to Add**
+| Type                  | Protocol | Port Range | Source              | Description                             |
+| --------------------- | -------- | ---------- | ------------------- | ----------------------------------------|
+| **SSH**               | TCP      | 22         | *Your Public IP*    | To connect via SSH                      |
+| **HTTP (Custom TCP)** | TCP      | 8080       | `0.0.0.0/0`         | To access website in browser (`http://<AWS_PUBLIC_IP>:8080`)  |
+
+**Note:**
+- In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
+- That means the browser will access your site on port 8080 — not 80.
+- You can change this mapping if you prefer direct port 80 access (see below).
+
+
+### Step-6: Access Website
+- Open browser:
+  - Apache → http://<HOST_IP>:8080
+
 **You should see your custom website running inside the container 🎉**
 
-### Step-6: Test Dynamic Content Update
+
+
+### Step-7: Test Dynamic Content Update
 ```sh
 # Modify your website files on the host:
-echo "<h1>Updated Website Content 🚀</h1>" > /home/ubuntu/data/index.html
+echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
 ```
 Refresh the browser → Updated content will instantly reflect inside the container.
 
