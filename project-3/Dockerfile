@@ -1,19 +1,20 @@
-# Official Drupal 10 image as base
+# Base Image
 FROM drupal:10.2.7-slim
 
-# Install git
+# Install Git (to clone the theme)
 RUN apt-get update && \
     apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory to themes folder
+# Set working directory for themes
 WORKDIR /var/www/html/themes
 
-# Clone the Bootstrap theme (drupal contrib theme)
-RUN git clone --branch 8.x-4.x --single-branch --depth 1 https://git.drupalcode.org/project/bootstrap.git
+# Clone the official Bootstrap theme
+RUN git clone --branch 8.x-4.x --single-branch --depth 1 \
+    https://git.drupalcode.org/project/bootstrap.git
 
-# Set proper file ownership for Drupal's web server user
+# Fix permissions for web user
 RUN chown -R www-data:www-data bootstrap
 
-# Reset working directory back to Drupal's default
+# Reset to Drupal root directory
 WORKDIR /var/www/html

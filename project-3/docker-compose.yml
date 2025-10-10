@@ -3,19 +3,18 @@ version: "3.8"
 services:
   drupal:
     build: .
-    image: custom-drupal
+    container_name: drupal-app
     ports:
       - "8080:80"
-    volumes:
-      - drupal-data:/var/www/html/modules
-      - drupal-data:/var/www/html/profiles
-      - drupal-data:/var/www/html/sites
-      - drupal-data:/var/www/html/themes
     depends_on:
       - db
+    volumes:
+      - drupal-data:/var/www/html
+    restart: always
 
   db:
     image: mariadb:10.9
+    container_name: drupal-db
     environment:
       MYSQL_DATABASE: drupal
       MYSQL_USER: drupal
@@ -23,6 +22,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db-data:/var/lib/mysql
+    restart: always
 
 volumes:
   drupal-data:

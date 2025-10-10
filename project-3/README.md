@@ -1,76 +1,81 @@
-# Drupal Compose with MariaDB & Bootstrap
+# Drupal & MariaDB using Docker Compose
 
-### 🎯 Objective
+## Objective
+Deploy a Drupal 10 website with a MariaDB database using Docker Compose.
 
-Set up a Drupal-10 site with a MariaDB backend using Docker Compose. This project demonstrates:
- - Container orchestration with Docker Compose
- - Custom Drupal image with a Bootstrap-based theme
- - Persistent volumes for data
- - No host-level dependencies
+**This project demonstrates:**
+ - Multi-container orchestration with Docker Compose
+ - Custom Drupal image including Bootstrap theme
+ - Persistent volumes for Drupal & database data
+ - Lightweight, dependency-free local setup
 
-> ⚙️ Tools used: Docker, Docker Compose, Git, Drupal, MariaDB
 
----
+## Prerequisites
+- [Docker Engine](https://docs.docker.com/get-docker/)
+- [Docker Compose v2+](https://docs.docker.com/compose/install/)
 
-### 🚀 Project Overview: Dockerized Drupal with Bootstrap
 
-1. 📦 Dockerfile – Building a Custom Drupal Image
-> Keeping layers minimal, cleaning cache, avoiding unnecessary layers (like extra RUN commands), setting correct file permissions, and not installing directly on host.
+## Custom Drupal Image (Dockerfile)
+The **Dockerfile** builds a custom **Drupal 10.2.7** image with a pre-installed **Bootstrap theme**.
+It’s included in this project and is automatically used during the Docker Compose build process.
 
-1. 🧩 docker-compose.yml – Orchestrating Services
-> - Used volumes for drupal data and database to persist across restarts.
-> - `depends_on` helps with service startup order (though not health-check based).
-> - Built `drupal` image from local Dockerfile, tagged as custom-drupal.
+### Notes:
+- `--single-branch` and `--depth 1` make cloning faster and lightweight.
+- `rm -rf /var/lib/apt/lists/*` reduces final image size.
+- `chown` ensures Drupal can read/write theme files.
 
----
 
-### Theme Overview:
-**Before applying theme to drupal**
-![before-theme-apply](https://github.com/ahsan598/devops-projects-hands-on/blob/main/project-3-drupal-docker-compose/img/before-theme-applied.jpg)
+## Docker Compose Setup
+The `docker-compose.yml` file defines both the **Drupal** and **MariaDB** containers, along with their **persistent volumes and network configuration**.
+It’s also included in the project and orchestrates the full environment.
 
-**After applying theme to drupal**
-![after-theme-apply](https://github.com/ahsan598/devops-projects-hands-on/blob/main/project-3-drupal-docker-compose/img/after-theme-applied.jpg) 
 
----
-
-### 🛠️ How to Run the Project
-
+## How to Run the Project
 ```sh
-# 1. Build and start the containers
+# 1. Build and start containers
 docker compose up -d
 
-# 2. Access the site in your browser
+# 2. Access Drupal
 http://localhost:8080
 
-# 3. Follow Drupal's installation wizard (select MariaDB and provide credentials used in docker-compose)
+# 3. During Drupal installation:
+- Database type: MariaDB
+- Host: db
+- Database: drupal
+- User: drupal
+- Password: drupal
 
-# 4. After setup, go to Appearance > Bootstrap > Install and set as default
+# 4. After setup, navigate:
+Appearance → Bootstrap → Install → Set as default theme
 
-# 5. Done! The theme is now applied.
-
-# 6. If you stop the containers:
+# 5. Stop containers (data persists)
 docker compose down
-
-# This will stop and remove containers, but preserve volumes (data persists)
 ```
 
----
-
-### 📚 What I Learned
-
-- Building custom images using Dockerfile
-- Multi-container orchestration with docker-compose
-- How to persist data using docker volumes
-- Installing and applying a drupal theme from git
-- Clean image building practices
+**Persistent Volumes**
+- `drupal-data` → Drupal site files
+- `db-data` → MariaDB data
+> Volumes remain intact after **docker compose down**.
 
 
-### ✍️ Notes
+## Theme Overview:
+**Before Applying Bootstrap Theme**
+![before-theme-apply](https://github.com/ahsan598/docker-projects/blob/main/project-3/img/before-theme-applied.jpg)
 
-- Keep files minimal and clean
-- Focus on reusability, clarity, and understanding over production-readiness.
+**After Applying Bootstrap Theme**
+![after-theme-apply](https://github.com/ahsan598/docker-projects/blob/main/project-3/img/after-theme-applied.jpg)
 
----
-<!-- 
-### 🙌 Credit
-Learned via **Docker Mastery: with Kubernetes + Swarm by @bretfisher** on Udemy. -->
+
+## Learnings
+- Building & extending official Docker images
+- Using Docker Compose for multi-service orchestration
+- Persistent storage with named volumes
+- Applying custom themes in Drupal through Docker
+- Optimizing image size and permissions
+
+
+## Notes
+- Use minimal layers in Dockerfile for efficiency
+- Volumes persist site and database data
+- Re-run `docker compose up` to restore previous state
+- Project focused on learning — not production security
