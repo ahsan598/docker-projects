@@ -3,12 +3,6 @@
 This document provides instructions to install **Docker** on **Ubuntu** based instances and run a simple test container.
 Use this as a reference for all projects that require Docker.
 
-## Contents
-1. [Install Docker](#install-docker-on-ubuntu-based-instances)
-2. [Non-root Docker usage](#optional-allow-non-root-user-to-run-docker-without-sudo)
-3. [Run Apache container](#download--run-apache-container)
-4. [Useful Docker Commands](#some-useful-docker-commands)
-
 
 ## Install Docker on Ubuntu based instances
 - A bash script `install-docker.sh` is provided in this directory. It automates Docker Engine and Docker Compose installation.
@@ -23,7 +17,7 @@ sudo chmod +x install-docker.sh
 # Verify by running the hello-world image
 sudo docker run hello-world
 ```
-**If the output shows "Hello from Docker!", Docker is installed successfully.**
+If the output shows **"Hello from Docker!"**, Docker is installed successfully.
 
 
 ## Optional: Allow non-root user to run docker without sudo
@@ -32,17 +26,29 @@ sudo groupadd docker                # Only needed if 'docker' group doesn't exis
 sudo usermod -aG docker $USER       # Add your user to the docker group.
 newgrp docker                       # To apply group changes
 ```
+**Note:** You may need to log out and log back in for group changes to take effect.
+
 
 ## Download & Run Apache Container
 ```sh
 # Run and apache conatiner with latest image
 sudo docker container run -d -p 8080:80 --name apache httpd:latest
+
+# Verify container is running:
+sudo docker ps
 ```
+
+### Access Website
+- Open browser:
+  - Apache → http://<AWS_PUBLIC_IP>:8080
+
+**You should see Apache welcome page**
+
 
 ## Some useful Docker Commands
 ```sh
 # List running containers
-sudo docker ps -a
+sudo docker ps
 
 # List all available docker images
 sudo docker images
