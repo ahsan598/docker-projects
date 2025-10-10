@@ -1,11 +1,12 @@
 # 🐳 Docker Installation & Quick Start
 
-This document provides instructions to install **Docker** on **Ubuntu based instances** and run a simple test container.
+This document provides instructions to install **Docker** on **Ubuntu** and run a simple test container.
 Use this as a reference for all projects that require Docker.
 
 
 ## Install Docker on Ubuntu based instances
 - A bash script `install-docker.sh` is provided in this directory. It automates Docker Engine and Docker Compose installation.
+
 - Execute the script to install Docker
 ```sh
 # Make the script executable
@@ -13,6 +14,11 @@ sudo chmod +x install-docker.sh
 
 # Run the script
 ./install-docker.sh
+
+# Verify Docker installation
+sudo docker --version
+sudo docker compose version
+
 
 # Verify by running the hello-world image
 sudo docker run hello-world
@@ -31,32 +37,16 @@ newgrp docker                       # To apply group changes
 
 ## Download & Run Apache Container
 ```sh
-# Run an apache conatiner with latest image
+# Run an Apache container with latest image
 sudo docker container run -d -p 8080:80 --name apache httpd:latest
 
 # Verify container is running:
 sudo docker ps
+
+# Verification via curl (local machine):
+curl http://localhost:8080
 ```
-
-## AWS Security Group Configuration
-To access your Dockerized Apache website running on an AWS EC2 instance, make sure your Security Group allows the correct inbound traffic.
-**Inbound Rules to Add**
-| Type                  | Protocol | Port Range | Source              | Description                             |
-| --------------------- | -------- | ---------- | ------------------- | ----------------------------------------|
-| **SSH**               | TCP      | 22         | *Your Public IP*    | To connect via SSH                      |
-| **HTTP (Custom TCP)** | TCP      | 8080       | `0.0.0.0/0`         | To access website in browser            |
-
-**Note:**
-- In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
-- That means the browser will access your site on port 8080 — not 80.
-- You can change this mapping if you prefer direct port 80 access.
-
-
-### Access Website
-- Open browser:
-  - Apache → http://<AWS_PUBLIC_IP>:8080
-
-**You should see Apache welcome page**
+**Note:** Host port 8080 maps to container port 80, so you access it via http://localhost:8080
 
 
 ## Some useful Docker Commands
