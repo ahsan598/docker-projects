@@ -1,4 +1,4 @@
-# 🐳 Docker Installation & Quick Start
+# Docker Installation & Quick Start
 
 This document provides instructions to install **Docker** on **Ubuntu** and run a simple test container.
 Use this as a reference for all projects that require Docker.
@@ -23,8 +23,7 @@ sudo docker compose version
 # Verify by running the hello-world image
 sudo docker run hello-world
 ```
-If the output shows **"Hello from Docker!"**, Docker is installed successfully.
-
+[!docker-version](/docker-installation/imgs/docker-version.png)
 
 ## Optional: Allow non-root user to run docker without sudo
 ```sh
@@ -47,6 +46,8 @@ sudo docker ps
 curl http://localhost:8080
 ```
 **Note:** Host port 8080 maps to container port 80, so you access it via http://localhost:8080
+
+[!dokcer-container](/docker-installation/imgs/docker-container.png)
 
 
 ## Some useful Docker Commands
