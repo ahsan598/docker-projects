@@ -1,6 +1,6 @@
 # 🐳 Docker Installation & Quick Start
 
-This document provides instructions to install **Docker** on **Ubuntu** based instances and run a simple test container.
+This document provides instructions to install **Docker** on **Ubuntu based instances** and run a simple test container.
 Use this as a reference for all projects that require Docker.
 
 
@@ -31,12 +31,26 @@ newgrp docker                       # To apply group changes
 
 ## Download & Run Apache Container
 ```sh
-# Run and apache conatiner with latest image
+# Run an apache conatiner with latest image
 sudo docker container run -d -p 8080:80 --name apache httpd:latest
 
 # Verify container is running:
 sudo docker ps
 ```
+
+## AWS Security Group Configuration
+To access your Dockerized Apache website running on an AWS EC2 instance, make sure your Security Group allows the correct inbound traffic.
+**Inbound Rules to Add**
+| Type                  | Protocol | Port Range | Source              | Description                             |
+| --------------------- | -------- | ---------- | ------------------- | ----------------------------------------|
+| **SSH**               | TCP      | 22         | *Your Public IP*    | To connect via SSH                      |
+| **HTTP (Custom TCP)** | TCP      | 8080       | `0.0.0.0/0`         | To access website in browser            |
+
+**Note:**
+- In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
+- That means the browser will access your site on port 8080 — not 80.
+- You can change this mapping if you prefer direct port 80 access.
+
 
 ### Access Website
 - Open browser:
