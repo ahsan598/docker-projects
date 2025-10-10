@@ -115,23 +115,7 @@ echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
 **In this project → Bind Mount is used to dynamically update website files.**
 
 
-## Useful Docker Commands
-```sh
-# List running containers
-sudo docker ps
 
-# View logs of a container
-sudo docker logs apache
-
-# Inspect container details
-sudo docker inspect apache
-
-# Stop and remove container
-sudo docker stop apache && docker rm apache
-
-# Remove an image
-sudo docker rmi httpd:latest
-```
 
 ## Outcome
 - Successfully deployed a website in a Docker **Apache** container

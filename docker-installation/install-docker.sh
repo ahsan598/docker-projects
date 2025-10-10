@@ -36,12 +36,3 @@ sudo apt-get install -y \
     containerd.io \
     docker-buildx-plugin \
     docker-compose-plugin
-
-# Enable and start Docker service
-sudo systemctl enable docker
-sudo systemctl start docker
-
-# Optional: Allow non-root user to run docker without sudo
-# sudo groupadd docker                # Only needed if 'docker' group doesn't exist
-# sudo usermod -aG docker $USER       # Add your user to the docker group.
-# newgrp docker                       # To apply group changes
