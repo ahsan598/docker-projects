@@ -69,12 +69,12 @@ To access your Dockerized Apache website running on an AWS EC2 instance, make su
 | **SSH**               | TCP      | 22         | *Your Public IP*    | To connect via SSH                      |
 | **HTTP (Custom TCP)** | TCP      | 8080       | `0.0.0.0/0`         | To access website in browser            |
 
+![sg-ports](/project-1/imgs/sg-ports.png)
+
 **Note:**
 - In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
 - That means the browser will access your site on port 8080 — not 80.
 - You can change this mapping if you prefer direct port 80 access.
-
-![sg-ports](/project-1/imgs/sg-ports.png)
 
 
 ### Step-5: Access Website

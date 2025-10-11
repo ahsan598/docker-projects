@@ -11,8 +11,8 @@ Deploy a Drupal 10 website with a MariaDB database using Docker Compose.
 
 
 ## Prerequisites
-- [Docker Engine](https://docs.docker.com/get-docker/)
-- [Docker Compose v2+](https://docs.docker.com/compose/install/)
+- Ubuntu system (local or AWS instance)
+- Docker installed (Refer to the [Docker Installation Guide](/docker-installation/readme.md) if needed)
 
 
 ## Custom Drupal Image (Dockerfile)
