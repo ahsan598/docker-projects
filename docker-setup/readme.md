@@ -69,16 +69,4 @@ sudo docker start apache
 
 # Remove a container (must be stopped first)
 sudo docker rm apache
-
-# View logs of a container
-sudo docker logs apache
-
-# Inspect container details
-sudo docker inspect apache
-
-# Show resource usage (CPU, RAM) of running containers
-sudo docker stats
-
-# Remove unused containers, networks, images (safe cleanup)
-sudo docker system prune
 ```

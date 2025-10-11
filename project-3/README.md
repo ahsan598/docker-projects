@@ -1,7 +1,7 @@
 # Drupal & MariaDB using Docker Compose
 
 ## Objective
-Deploy a Drupal 10 website with a MariaDB database using Docker Compose.
+Deploy a **Drupal-10** website with a **MariaDB** database using Docker Compose.
 
 **This project demonstrates:**
  - Multi-container orchestration with Docker Compose
@@ -60,22 +60,15 @@ docker compose down
 
 ## Theme Overview:
 **Before Applying Bootstrap Theme**
-![before-theme-apply](https://github.com/ahsan598/docker-projects/blob/main/project-3/img/before-theme-applied.jpg)
+![before-theme-apply](/project-3/img/before-theme-applied.jpg)
 
 **After Applying Bootstrap Theme**
-![after-theme-apply](https://github.com/ahsan598/docker-projects/blob/main/project-3/img/after-theme-applied.jpg)
+![after-theme-apply](/project-3/img/after-theme-applied.jpg)
 
 
-## Learnings
+## Outcome
 - Building & extending official Docker images
 - Using Docker Compose for multi-service orchestration
 - Persistent storage with named volumes
 - Applying custom themes in Drupal through Docker
 - Optimizing image size and permissions
-
-
-## Notes
-- Use minimal layers in Dockerfile for efficiency
-- Volumes persist site and database data
-- Re-run `docker compose up` to restore previous state
-- Project focused on learning — not production security

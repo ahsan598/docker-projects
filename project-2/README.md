@@ -11,9 +11,9 @@ This setup demonstrates how **multiple services** can be managed together using 
 
 
 ## Prerequisites
+- Ubuntu system (local or AWS instance)
 - Docker and Docker Compose installed (Refer to the [Docker Installation Guide](/docker-installation/readme.md))
 - Basic understanding of YAML syntax
-- Ubuntu system (local or AWS instance)
 
 
 ## Steps to Implement
