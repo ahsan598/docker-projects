@@ -1,10 +1,9 @@
 # Docker Installation & Quick Start
 
-This document provides instructions to install **Docker** on **Ubuntu** and run a simple test container.
-Use this as a reference for all projects that require Docker.
+This document provides instructions to install **Docker** on **Ubuntu based instances** and run a simple test container. Use this as a reference for all projects that require Docker.
 
 
-## Install Docker on Ubuntu
+## Install Docker on Ubuntu based instances
 - A bash script `install-docker.sh` is provided in this directory. It automates Docker Engine and Docker Compose installation.
 
 - Execute the script to install Docker
@@ -19,11 +18,11 @@ sudo chmod +x install-docker.sh
 sudo docker --version
 sudo docker compose version
 
-
 # Verify by running the hello-world image
 sudo docker run hello-world
 ```
 ![docker-version](/docker-setup/imgs/docker-version.png)
+
 
 ## Optional: Allow non-root user to run docker without sudo
 ```sh
