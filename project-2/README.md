@@ -1,13 +1,25 @@
 # Deploy Apache & Nginx Containers using Docker Compose
 
 ## Objective
-In this project, we will use **Docker Compose** to deploy two web servers — **Apache and Nginx** — running as separate containers on the same host machine.
+- Use **Docker Compose** to deploy two web servers — **Apache and Nginx** — running as separate containers on the same host machine.
+- Each container is exposed on a different port:
+  - **Apache → Port 91**
+  - **Nginx → Port 92**
+- Demonstrates how **multiple services** can be managed together using a single configuration file (`docker-compose.yml`).
+- Explore **Bind Mounts** for **live updates**: any changes on the host machine are instantly reflected inside the containers without rebuilding.
 
-Each container will be exposed on a different port:
-- **Apache → Port 91**
-- **Nginx → Port 92**
 
-This setup demonstrates how **multiple services** can be managed together using a single configuration file (`docker-compose.yml`).
+## What is a Bind Mount?
+A **Bind Mount** links a **host folder** to a **container folder**:
+- Changes on host → instantly visible in container.
+- Useful for dynamic web content updates.
+  
+**Example:**
+```yaml
+volumes:
+  - ./nginx-data:/usr/share/nginx/html
+```
+- Editing any file in `nginx-data` updates Nginx container content automatically.
 
 
 ## Prerequisites
@@ -16,10 +28,31 @@ This setup demonstrates how **multiple services** can be managed together using 
 - Basic understanding of YAML syntax
 
 
+## Project Structure
+
+```sh
+project-2/
+├── docker-compose.yml
+├── nginx-data/
+│   └── index.html
+└── apache-data/
+    └── index.html
+```
+
 ## Steps to Implement
 
-### Step-1: Create `docker-compose.yml` File
-A `docker-compose.yml` file is provided in the project to deploy Apache and Nginx containers with custom ports and bind mounts.
+### Step-1: Create Project Folders & Sample Pages
+
+```sh
+mkdir apache-data nginx-data
+
+echo "<h1>Hello from Nginx Bind Mount!</h1>" > nginx-data/index.html
+echo "<h1>Hello from Apache Bind Mount!</h1>" > apache-data/index.html
+```
+
+- Now create `docker-compose.yml` file.
+- Use the provided file to deploy Apache & Nginx containers with custom ports and bind mounts.
+
 
 ### Step-2: Deploy Both Containers
 - Run the following command in the same directory as your `docker-compose.yml`
@@ -33,8 +66,16 @@ sudo docker ps
 
 ![compose-up](/project-2/imgs/compose-file.png)
 
+- Open browser:
+  - Apache → http://<AWS_PUBLIC_IP>:91
+  - Nginx → http://<AWS_PUBLIC_IP>:92
 
-### Step-3: AWS Security Group Configuration (for Apache + Nginx)
+![access-website](/project-2/imgs/access-website.png)
+
+**Note:** The above image shows the default pages served without bind mounts, displaying their respective messages.
+
+
+### Step-3: AWS Security Group Configuration  (for Apache + Nginx)
 **Inbound Rules to Add**
 | Type       | Protocol | Port Range | Source              | Description                 |
 | ---------- | -------- | ---------- | --------------------| --------------------------- |
@@ -45,25 +86,16 @@ sudo docker ps
 ![sg-ports](/project-2/imgs/sg-ports.png)
 
 
-### Step-4: Access Website
-- Open browser:
-  - Apache → http://<AWS_PUBLIC_IP>:91
-  - Nginx → http://<AWS_PUBLIC_IP>:92
-- You should see their respective messages.
-
-![access-website](/project-2/imgs/access-website.png)
-
-
-## Concept Highlight: Docker Compose
-| Feature                | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| **Single Config File** | Manages multiple containers declaratively using YAML    |
-| **Port Mapping**       | Maps host ports to container ports easily               |
-| **Volume Binding**     | Links local directories to containers for live updates  |
-| **Ease of Management** | Start/stop all containers together with simple commands |
+### Step-4: Test Dynamic Content Update
+```sh
+# Modify your website files on the host:
+echo '<h1>Updated Website Content!</h1>' > apache-data/index.html
+```
+- Refresh the browser → Updated content will instantly reflect inside the container.
+- This proves Bind Mount keeps host and container files in sync in real-time.
 
 
-## Manage Containers via Docker Compose
+## Step-5: Manage Containers via Docker Compose
 ```sh
 # Stop all containers
 docker compose down
@@ -77,6 +109,18 @@ docker compose logs
 # Rebuild images (if Dockerfile is added later)
 docker compose up --build -d
 ```
+
+
+## Concept Highlight: Docker Compose
+| Feature                | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| **Single Config File** | Manages multiple containers declaratively using YAML    |
+| **Port Mapping**       | Maps host ports to container ports easily               |
+| **Volume Binding**     | Links local directories to containers for live updates  |
+| **Ease of Management** | Start/stop all containers together with simple commands |
+
+
+
 
 
 ## Outcome

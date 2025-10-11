@@ -4,6 +4,11 @@
 The goal of this project is to deploy a custom website inside a Docker Apache container.
 We will also demonstrate how dynamic content changes can be achieved by using Bind Mount, so that changes made on the host machine are instantly reflected inside the container without rebuilding it.
 
+## What is a Bind Mount?
+A **Bind Mount** is a way to share a folder between your **host system** and a **Docker container**.
+- Whatever you change on your **host machine** → instantly updates inside the container.
+- Useful for **dynamic web content** — you don’t need to rebuild the container again and again.
+
 
 ## Prerequisites
 - Ubuntu system (local or AWS instance)
@@ -62,7 +67,7 @@ curl http://localhost:8080
 
 
 ### Step-4: AWS Security Group Configuration
-To access your Dockerized Apache website running on an AWS EC2 instance, make sure your Security Group allows the correct inbound traffic.
+- To access your dockerized Apache website running on an AWS EC2 instance, make sure your security group allows the correct inbound traffic.
 **Inbound Rules to Add**
 | Type                  | Protocol | Port Range | Source              | Description                             |
 | --------------------- | -------- | ---------- | ------------------- | ----------------------------------------|
