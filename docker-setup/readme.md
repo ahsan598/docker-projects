@@ -4,7 +4,7 @@ This document provides instructions to install **Docker** on **Ubuntu** and run 
 Use this as a reference for all projects that require Docker.
 
 
-## Install Docker on Ubuntu based instances
+## Install Docker on Ubuntu
 - A bash script `install-docker.sh` is provided in this directory. It automates Docker Engine and Docker Compose installation.
 
 - Execute the script to install Docker

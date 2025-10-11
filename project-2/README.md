@@ -1,7 +1,7 @@
 # Deploy Apache & Nginx Containers using Docker Compose
 
 ## Objective
-In this project, we will use **Docker Compose** to deploy two web servers — **Apache (httpd)** and **Nginx** — running as separate containers on the same host machine.
+In this project, we will use **Docker Compose** to deploy two web servers — **Apache and Nginx** — running as separate containers on the same host machine.
 
 Each container will be exposed on a different port:
 - **Apache → Port 91**
@@ -11,37 +11,30 @@ This setup demonstrates how **multiple services** can be managed together using 
 
 
 ## Prerequisites
-- Docker and Docker Compose installed
+- Docker and Docker Compose installed (Refer to the [Docker Installation Guide](/docker-installation/readme.md))
 - Basic understanding of YAML syntax
 - Ubuntu system (local or AWS instance)
 
 
 ## Steps to Implement
 
-### Step-1: Install Docker & Docker Compose
-- If Docker is not installed, use previous installation script (`install-docker.sh`) with **Docker Compose plugin**.
-- Verify compose version by running below command
-```sh
-docker compose version
-```
-
-### Step-2: Create `docker-compose.yml` File
+### Step-1: Create `docker-compose.yml` File
 A `docker-compose.yml` file is provided in the project to deploy Apache and Nginx containers with custom ports and bind mounts.
 
-### Step-3: Deploy Both Containers
+### Step-2: Deploy Both Containers
 - Run the following command in the same directory as your `docker-compose.yml`
 ```sh
+# Start all containers
 docker compose up -d
 
 # Verify container is running:
 sudo docker ps
 ```
-**This will:**
-- Pull both images (httpd, nginx)
-- Create and start both containers
-- Map ports 91 and 92 to the host
 
-### Step-4: AWS Security Group Configuration (for Apache + Nginx Compose Project)
+![compose-up](/project-2/imgs/compose-file.png)
+
+
+### Step-3: AWS Security Group Configuration (for Apache + Nginx)
 **Inbound Rules to Add**
 | Type       | Protocol | Port Range | Source              | Description                 |
 | ---------- | -------- | ---------- | --------------------| --------------------------- |
@@ -49,12 +42,25 @@ sudo docker ps
 | Custom TCP | TCP      | 91         | 0.0.0.0/0           | Apache container web access |
 | Custom TCP | TCP      | 92         | 0.0.0.0/0           | Nginx container web access  |
 
+![sg-ports](/project-2/imgs/sg-ports.png)
 
-### Step-5: Access Website
+
+### Step-4: Access Website
 - Open browser:
   - Apache → http://<AWS_PUBLIC_IP>:91
   - Nginx → http://<AWS_PUBLIC_IP>:92
 - You should see their respective messages.
+
+![access-website](/project-2/imgs/access-website.png)
+
+
+## Concept Highlight: Docker Compose
+| Feature                | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| **Single Config File** | Manages multiple containers declaratively using YAML    |
+| **Port Mapping**       | Maps host ports to container ports easily               |
+| **Volume Binding**     | Links local directories to containers for live updates  |
+| **Ease of Management** | Start/stop all containers together with simple commands |
 
 
 ## Manage Containers via Docker Compose
@@ -71,14 +77,6 @@ docker compose logs
 # Rebuild images (if Dockerfile is added later)
 docker compose up --build -d
 ```
-
-## Concept Highlight: Docker Compose
-| Feature                | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| **Single Config File** | Manages multiple containers declaratively using YAML    |
-| **Port Mapping**       | Maps host ports to container ports easily               |
-| **Volume Binding**     | Links local directories to containers for live updates  |
-| **Ease of Management** | Start/stop all containers together with simple commands |
 
 
 ## Outcome

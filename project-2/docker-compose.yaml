@@ -5,12 +5,30 @@ services:
     container_name: apache_server                   # Container name
     ports:
       - "91:80"                                     # Host port 91 → Container port 80
-    volumes:
-      - ./apache-data:/usr/local/apache2/htdocs     # Bind mount for Apache content
   nginx:
     image: nginx:latest                             # Nginx Server image
     container_name: nginx_server                    # Container name
     ports:
       - "92:80"                                     # Host port 92 → Container port 80
-    volumes:
-      - ./nginx-data:/usr/share/nginx/html          # Bind mount for Nginx content
+
+
+# ------------------- Bind Mounts for Apache & Nginx -------------------
+
+# version: '3.8'                                      # Compose file format version
+# services:
+#   apache:
+#     image: httpd:latest                             # Apache HTTP Server image
+#     container_name: apache_server                   # Container name
+#     ports:
+#       - "91:80"                                     # Host port 91 → Container port 80
+#     volumes:
+#       - ./apache-data:/usr/local/apache2/htdocs     # Bind mount for Apache content
+#   nginx:
+#     image: nginx:latest                             # Nginx Server image
+#     container_name: nginx_server                    # Container name
+#     ports:
+#       - "92:80"                                     # Host port 92 → Container port 80
+#     volumes:
+#       - ./nginx-data:/usr/share/nginx/html          # Bind mount for Nginx content
+
+# ------------------- End of Bind Mounts for Apache & Nginx -------------------
