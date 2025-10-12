@@ -1,116 +1,88 @@
-# Containerized Web Deployment with Apache and Bind Mounts
+# Deploy Apache & Nginx Containers using Docker Compose
 
 ## Objective
-The goal of this project is to deploy a custom website inside a Docker Apache container.
-We will also demonstrate how dynamic content changes can be achieved by using Bind Mount, so that changes made on the host machine are instantly reflected inside the container without rebuilding it.
-
-## What is a Bind Mount?
-A **Bind Mount** is a way to share a folder between your **host system** and a **Docker container**.
-- Whatever you change on your **host machine** → instantly updates inside the container.
-- Useful for **dynamic web content** — you don’t need to rebuild the container again and again.
+- Deploy two web servers — **Apache and Nginx** — using a single **Docker Compose** file.
+- Demonstrate **multi-container** orchestration with Docker Compose.
+- Explore **Bind Mounts** for **live updates**: any changes on the host machine are instantly reflected inside the containers without rebuilding.
 
 
 ## Prerequisites
 - Ubuntu system (local or AWS instance)
-- Docker installed
+- Docker and Docker Compose installed
+- Basic understanding of YAML syntax
+- Make sure the following ports are open in your firewall or AWS Security Group:
+  - Apache → 91
+  - Nginx → 92
+  - SSH → 22
 
-- Docker & Docker compose installed
-## Steps to Implement:
 
-### Step-1: Download Apache Docker Image
+## Steps to Implement
+
+### Step-1: Create Project Folders & Sample Pages
 ```sh
-# Pull Apache (httpd) Docker Image
-sudo docker pull httpd:latest
+mkdir apache-data nginx-data
 
-# Verify image is available:
-sudo docker images
+echo "<h1>Hello from Nginx Bind Mount!</h1>" > nginx-data/index.html
+echo "<h1>Hello from Apache Bind Mount!</h1>" > apache-data/index.html
 ```
 
-### Step-2: Prepare Host Directory for Website
+- Configure both containers, ports, and bind mounts using the provided `docker-compose.yml` file.
+
+
+### Step-2: Deploy Both Containers
 ```sh
-# Create a directory on the host for your custom site:
-mkdir -p /home/ubuntu/data
-
-# Add an index.html file (Apache serves this by default):
-echo '<h1>Hello from Apache in Docker!</h1>' > /home/ubuntu/data/index.html
-```
-
-![index-file](/project-2/imgs/index-file.png)
-
-
-### Step-3: Run Apache Container with Bind Mount
-```sh
-# Running apache container with bind mount
-sudo docker container run -d \
-  -p 8080:80 \
-  --mount type=bind,source=/home/ubuntu/data,target=/usr/local/apache2/htdocs \
-  --name apache \
-  httpd:latest
+# Start all containers
+sudo docker compose up -d
 
 # Verify container is running:
 sudo docker ps
-
-# Optional verification via curl
-curl http://localhost:8080
 ```
 
-![apache](/project-2/imgs/apache.png)
-
-**Breakdown:**
-- `-d` → Detached mode (runs in background)
-- `-p 8080:80` → Map host port 8000 → container port 80
-- `--mount type=bind` → Bind mount host directory
-- `source=/home/ubuntu/data` → Host directory containing website files
-- `target=/usr/local/apache2/htdocs` → Apache’s web root inside container
-- `--name apache` → Assigns name "apache" to container
-- `httpd:latest` → Apache HTTP server image
+- Open your browser:
+  - Apache → http://<AWS_PUBLIC_IP>:91
+  - Nginx → http://<AWS_PUBLIC_IP>:92
 
 
-### Step-4: AWS Security Group Configuration
-- To access your dockerized Apache website running on an AWS EC2 instance, make sure your security group allows the correct inbound traffic.
-**Inbound Rules to Add**
-| Type                  | Protocol | Port Range | Source              | Description                             |
-| --------------------- | -------- | ---------- | ------------------- | ----------------------------------------|
-| **SSH**               | TCP      | 22         | *Your Public IP*    | To connect via SSH                      |
-| **HTTP (Custom TCP)** | TCP      | 8080       | `0.0.0.0/0`         | To access website in browser            |
 
-![sg-ports](/project-2/imgs/sg-ports.png)
-
-**Note:**
-- In this project, the Apache container exposes port 80 inside the container, but it’s mapped to port 8080 on the host (-p 8080:80).
-- That means the browser will access your site on port 8080 — not 80.
-- You can change this mapping if you prefer direct port 80 access.
-
-
-### Step-5: Access Website
-- Open browser:
-  - Apache → http://<AWS_PUBLIC_IP>:8080
-
-**You should see your custom website running inside the container 🎉**
-
-### Step-6: Test Dynamic Content Update
+### Step-3: Test Dynamic Content Update
 ```sh
-# Modify your website files on the host:
-echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
+# Update Apache website content
+echo "<h1>Updated Apache Content!</h1>" > apache-data/index.html
+
+# Update Nginx website content
+echo "<h1>Updated Nginx Content!</h1>" > nginx-data/index.html
 ```
-- Refresh the browser → Updated content will instantly reflect inside the container.
-- This proves Bind Mount keeps host and container files in sync in real-time.
-
-![updated-content](/project-2/imgs/updated-content.png)
+- Refresh your browser → changes will **appear instantly** without rebuilding the container.
+- Demonstrates **Bind Mounts** for live synchronization between host and container files.
 
 
-## Volume vs Bind Mount
-| Feature     | Bind Mount                               | Docker Volume                             |
-| ----------- | ---------------------------------------- | ----------------------------------------- |
-| Location    | Any path on host filesystem              | Managed by Docker (`/var/lib/docker/...`) |
-| Use Case    | Live development, real-time file updates | Persistent storage for databases, logs    |
-| Portability | Depends on host path                     | Easily portable across hosts/containers   |
-| Management  | Host-controlled                          | Docker-controlled (via CLI/API)           |
+## Manage Containers via Docker Compose
+```sh
+# Stop all containers
+sudo docker compose down
 
-**In this project → Bind Mount is used to dynamically update website files.**
+# Restart containers
+sudo docker compose up -d
+
+# View container logs
+sudo docker compose logs
+
+# Rebuild images (if Dockerfile added later)
+sudo docker compose up --build -d
+```
 
 
-## Outcome
-- Successfully deployed a website in a Docker **Apache** container
-- Achieved dynamic updates without rebuilding container using **Bind Mount**
-- Learned difference between **Bind Mount** vs **Volume**
+## Concept Highlight: Docker Compose
+| Feature                | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| **Single Config File** | Define and manage multiple containers declaratively       |
+| **Port Mapping**       | Map host ports to container ports for external access     |
+| **Volume Binding**     | Link host directories to containers for real-time updates |
+| **Ease of Management** | Start, stop, and monitor all containers together          |
+
+
+## What I Learned
+- Deployed **two web servers** using a single **Docker Compose** file.
+- Configured **Apache** to serve content on **port 91**.
+- Configured **Nginx** to serve content on **port 92**.
+- Demonstrated the practical use of **multi-container** orchestration with **Docker Compose**.
