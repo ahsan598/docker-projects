@@ -38,10 +38,13 @@ sudo docker compose up -d
 sudo docker ps
 ```
 
+![compose-file](/project-2/imgs/compose-file.png)
+
 - Open your browser:
   - Apache → http://<AWS_PUBLIC_IP>:91
   - Nginx → http://<AWS_PUBLIC_IP>:92
 
+![access-website](/project-2/imgs/access-website.png)
 
 
 ### Step-3: Test Dynamic Content Update
@@ -55,6 +58,7 @@ echo '<h1>Updated Nginx Content!</h1>' > nginx-data/index.html
 - Refresh your browser → changes will **appear instantly** without rebuilding the container.
 - Demonstrates **Bind Mounts** for live synchronization between host and container files.
 
+![updated-content](/project-2/imgs/updated-content.png)
 
 ## Manage Containers via Docker Compose
 ```sh
