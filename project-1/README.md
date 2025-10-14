@@ -1,7 +1,7 @@
 # Containerized Web Deployment with Apache and Bind Mounts
 
 ## Objective
-The goal of this project is to deploy a custom website inside a Docker Apache container. We will also demonstrate how **dynamic content updates** can be achieved by using **Bind Mounts**, so that changes made on the host machine are instantly reflected inside the container without rebuilding it.
+The goal of this project is to deploy a custom website inside a Apache container. We will also demonstrate how **dynamic content updates** can be achieved by using **Bind Mounts**, so that changes made on the host machine are instantly reflected inside the container without rebuilding it.
 
 ### What is a Bind Mount?
 A **Bind Mount** is a way to share a folder between your **host system** and a **Docker container**.
@@ -58,7 +58,7 @@ curl http://localhost:8080
 
 **Breakdown:**
 - `-d` → Detached mode (runs in background)
-- `-p 8080:80` → Map host port 8000 → container port 80
+- `-p 8080:80` → Map host port 8080 → container port 80
 - `--mount type=bind` → Bind mount host directory
 - `source=/home/ubuntu/data` → Host directory containing website files
 - `target=/usr/local/apache2/htdocs` → Apache’s web root inside container
@@ -73,10 +73,7 @@ curl http://localhost:8080
   - Apache → http://<AWS_PUBLIC_IP>:8080
 - You should see your custom website running inside the container.
 
-**Note:**
-- Apache container exposes **port 80** internally, mapped to **port 8080** on the host (`-p 8080:80`).
-- Access the website using `port 8080` in the browser.
-- You can change this mapping if you want to access the site on a different port (e.g., `-p 5000:80`).
+**Note:** Apache container exposes on **port 80** internally, which is mapped to **port 8080** on the host.
 
 
 ### Step-5: Test Dynamic Content Update

@@ -22,8 +22,8 @@
 ```sh
 mkdir apache-data nginx-data
 
-echo "<h1>Hello from Nginx Bind Mount!</h1>" > nginx-data/index.html
-echo "<h1>Hello from Apache Bind Mount!</h1>" > apache-data/index.html
+echo '<h1>Hello from Nginx Bind Mount!</h1>' > nginx-data/index.html
+echo '<h1>Hello from Apache Bind Mount!</h1>' > apache-data/index.html
 ```
 
 - Configure both containers, ports, and bind mounts using the provided `docker-compose.yml` file.
@@ -47,10 +47,10 @@ sudo docker ps
 ### Step-3: Test Dynamic Content Update
 ```sh
 # Update Apache website content
-echo "<h1>Updated Apache Content!</h1>" > apache-data/index.html
+echo '<h1>Updated Apache Content!</h1>' > apache-data/index.html
 
 # Update Nginx website content
-echo "<h1>Updated Nginx Content!</h1>" > nginx-data/index.html
+echo '<h1>Updated Nginx Content!</h1>' > nginx-data/index.html
 ```
 - Refresh your browser → changes will **appear instantly** without rebuilding the container.
 - Demonstrates **Bind Mounts** for live synchronization between host and container files.
