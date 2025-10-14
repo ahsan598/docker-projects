@@ -13,7 +13,7 @@ services:
     restart: always
 
   db:
-    image: mariadb:10.9
+    image: mariadb:11.8
     container_name: drupal-db
     environment:
       MYSQL_DATABASE: drupal

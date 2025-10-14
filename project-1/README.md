@@ -87,6 +87,15 @@ echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
 ![updated-content](/project-1/imgs/updated-content.png)
 
 
+## Volume vs Bind Mount
+| Feature     | Bind Mount                               | Docker Volume                             |
+| ----------- | ---------------------------------------- | ----------------------------------------- |
+| Location    | Any path on host filesystem              | Managed by Docker (`/var/lib/docker/...`) |
+| Use Case    | Live development, real-time file updates | Persistent storage for databases, logs    |
+| Portability | Depends on host path                     | Easily portable across hosts/containers   |
+| Management  | Host-controlled                          | Docker-controlled (via CLI/API)           |
+
+
 ## What I learned
 - Understood when and why to use **Bind Mounts** in Docker.
 - Successfully deployed a website using an **Apache container**.
