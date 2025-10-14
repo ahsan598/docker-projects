@@ -51,10 +51,8 @@ sudo docker container run -d \
 
 # Verify container is running:
 sudo docker ps
-
-# Optional verification via curl
-curl http://localhost:8080
 ```
+![apache](/project-1/imgs/apache.png)
 
 **Breakdown:**
 - `-d` → Detached mode (runs in background)
@@ -65,26 +63,22 @@ curl http://localhost:8080
 - `--name apache` → Assigns name "apache" to container
 - `httpd:latest` → Apache HTTP server image
 
-![apache](/project-1/imgs/apache.png)
-
-
-### Step-4: Access Website
-- Open browser:
-  - Apache → http://<AWS_PUBLIC_IP>:8080
-- You should see your custom website running inside the container.
-
-**Note:** Apache container exposes on **port 80** internally, which is mapped to **port 8080** on the host.
-
-
-### Step-5: Test Dynamic Content Update
 ```sh
+# Optional verification via curl
+curl http://localhost:8080
+
+# Access Apache site
+http://<AWS_PUBLIC_IP>:8080
+
 # Modify your website files on the host:
 echo '<h1>Updated Website Content!</h1>' > /home/ubuntu/data/index.html
+
+# Refresh the browser, updated content will instantly reflect inside the container.
 ```
-- Refresh the browser → Updated content will instantly reflect inside the container.
-- This proves Bind Mount keeps host and container files in sync in real-time.
 
 ![updated-content](/project-1/imgs/updated-content.png)
+
+**Note:** Apache container exposes on **port 80** internally, which is mapped to **port 8080** on the host.
 
 
 ## Volume vs Bind Mount

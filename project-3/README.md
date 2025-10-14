@@ -67,22 +67,19 @@ http://<YOUR_HOST_IP>:8080
 3. Click Install
 4. Click Set as default theme
 Your site should now use the Bootstrap theme.
-
 **Optional:** Customize the theme settings (colors, layout, typography) via the Appearance → Settings page.
-
-
-**Persistent Volumes**
-Data persists even after stopping the containers:
-- `drupal-data` → site files, modules, themes, uploaded content
-- `db-data` → database files
-
 
 ## Theme Overview:
 **Before Applying Bootstrap Theme**
 ![before-theme-apply](/project-3/img/before-theme-applied.jpg)
-
 **After Applying Bootstrap Theme**
 ![after-theme-apply](/project-3/img/after-theme-applied.jpg)
+
+
+## Persistent Volumes
+Data persists even after stopping the containers:
+- `drupal-data` → site files, modules, themes, uploaded content
+- `db-data` → database files
 
 
 ## What I Learned

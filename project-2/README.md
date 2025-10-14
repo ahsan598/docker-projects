@@ -36,14 +36,15 @@ sudo docker compose up -d
 
 # Verify container is running:
 sudo docker ps
+
+# Access Apache site
+http://<AWS_PUBLIC_IP>:91
+
+# Access Nginx site
+http://<AWS_PUBLIC_IP>:92
 ```
 
 ![compose-file](/project-2/imgs/compose-file.png)
-
-- Open your browser:
-  - Apache → http://<AWS_PUBLIC_IP>:91
-  - Nginx → http://<AWS_PUBLIC_IP>:92
-
 ![access-website](/project-2/imgs/access-website.png)
 
 
