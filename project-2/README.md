@@ -55,10 +55,9 @@ echo '<h1>Updated Apache Content!</h1>' > apache-data/index.html
 
 # Update Nginx website content
 echo '<h1>Updated Nginx Content!</h1>' > nginx-data/index.html
-```
-- Refresh your browser → changes will **appear instantly** without rebuilding the container.
-- Demonstrates **Bind Mounts** for live synchronization between host and container files.
 
+# Refresh your browser, changes will **appear instantly** without rebuilding the container.
+```
 ![updated-content](/project-2/imgs/updated-content.png)
 
 ## Manage Containers via Docker Compose
