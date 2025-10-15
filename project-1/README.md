@@ -67,7 +67,7 @@ sudo docker ps
 # Optional verification via curl
 curl http://localhost:8080
 
-# Access Apache site
+# Access Apache site in Browser
 http://<AWS_PUBLIC_IP>:8080
 
 # Modify your website files on the host:

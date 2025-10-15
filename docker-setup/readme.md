@@ -1,10 +1,25 @@
-# Docker Installation & Quick Start
+# Docker Installation & Quick Start Guide
 
-This document provides instructions to install **Docker** on **Ubuntu based instances** and run a simple test container. Use this as a reference for all projects that require Docker.
+This guide provides step-by-step instructions to install **Docker Engine** and **Docker Compose** on **Ubuntu-based systems** and demonstrates running your first container. Use this as a reference for all projects that require Docker.
 
 
-## Install Docker on Ubuntu based instances
-- A bash script `install-docker.sh` is provided in this directory. It automates Docker Engine and Docker Compose installation.
+## Prerequisites
+Before you begin, ensure you have
+- Ubuntu-based system (local VM or cloud instance)
+- Terminal access (SSH, GitBash, or PowerShell)
+- Sudo privileges on the target machine
+
+### Required Ports
+Ensure the following ports are open in your firewall or security group:
+
+| Service | Port |
+|---------|------|
+| Apache  | 8080 |
+| SSH     | 22   |
+
+
+## Installation Steps
+- An automated installation script `install-docker.sh` is provided to simplify the setup process.
 
 - Execute the script to install Docker
 ```sh
@@ -24,48 +39,47 @@ sudo docker run hello-world
 ![docker-version](/docker-setup/imgs/docker-version.png)
 
 
-## Optional: Allow non-root user to run docker without sudo
+## Post-Installation (Optional)
+
+### Run Docker Without Sudo
+To allow non-root users to run Docker commands without `sudo`
 ```sh
-sudo groupadd docker                # Only needed if 'docker' group doesn't exist
-sudo usermod -aG docker $USER       # Add your user to the docker group.
-newgrp docker                       # To apply group changes
+# Add your user to the docker group.
+sudo usermod -aG docker $USER  
+
+# Apply group changes immediately
+newgrp docker                       
 ```
-**Note:** You may need to log out and log back in for group changes to take effect.
+
+> **Note:** Log out and log back in for group changes to take full effect.
 
 
-## Download & Run Apache Container
+## Quick Start Example
+
+### Run Apache Web Server
 ```sh
-# Run an Apache container with latest image
-sudo docker container run -d -p 8080:80 --name apache httpd:latest
+# Pull & run an Apache container with latest image
+sudo docker run -d -p 8080:80 --name apache httpd:latest
 
 # Verify container is running:
 sudo docker ps
 
-# Verification via curl (local machine):
+# Test Apache response (via curl):
 curl http://localhost:8080
+
+# Access Apache site in Browser
+http://localhost:8080
 ```
-**Note:** Host port 8080 maps to container port 80, so you access it via http://localhost:8080
+
+The Apache server will be accessible at host port 8080 maps to container port 80.
 
 ![dokcer-container](/docker-setup/imgs/docker-container.png)
 
 
-## Some useful Docker Commands
-```sh
-# List running containers
-sudo docker ps
+## Troubleshooting
 
-# List all available docker images
-sudo docker images
+1. **Permission denied errors:** Ensure you've added your user to the docker group or use `sudo`.
 
-# Remove an image
-sudo docker rmi httpd:latest
+2. **Port conflicts:** If port `8080` is already in use, change the host port mapping (e.g., `-p 9090:80`).
 
-# Stop a running container
-sudo docker stop apache
-
-# Start a stopped container
-sudo docker start apache
-
-# Remove a container (must be stopped first)
-sudo docker rm apache
-```
+3. **Container won't start:** Check logs with `docker logs <container-name>` for error details.

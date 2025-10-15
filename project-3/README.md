@@ -48,7 +48,7 @@ If you mount `/var/www/html` as a volume in Docker Compose, the cloned theme may
 # Build and start containers
 sudo docker compose up -d
 
-# Access Drupal site
+# Access Drupal site in Browser
 http://<YOUR_HOST_IP>:8080
 ```
 

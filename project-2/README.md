@@ -37,10 +37,10 @@ sudo docker compose up -d
 # Verify container is running:
 sudo docker ps
 
-# Access Apache site
+# Access Apache site in Browser
 http://<AWS_PUBLIC_IP>:91
 
-# Access Nginx site
+# Access Nginx site in Browser
 http://<AWS_PUBLIC_IP>:92
 ```
 
