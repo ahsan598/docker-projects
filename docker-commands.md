@@ -421,7 +421,7 @@ docker inspect --format='{{.State.Health.Status}}' web
 ## Quick Reference Table
 
 Category  |  Command                                |  Purpose                    
-----------+-----------------------------------------+-----------------------------
+----------|-----------------------------------------|-----------------------------
 Search    |  docker search nginx                    |  Search Docker Hub          
 Tag       |  docker tag image:tag new-name:tag      |  Rename/tag image           
 Push      |  docker push username/image:tag         |  Upload to registry         
