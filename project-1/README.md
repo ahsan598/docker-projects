@@ -149,25 +149,27 @@ Understanding when to use each storage option:
 
 ## Troubleshooting
 
-1. **Container won't start:**
-- Check container logs
+**1. Container won't start:**
+
+Check container logs
 ```sh
 sudo docker logs apache
 ```
-**Permission denied errors:**
+**2. Permission denied errors:**
 
-- Fix file permissions
+Fix file permissions
 ```sh
 sudo chmod -R 755 /home/ubuntu/data
 ```
 
-2. **Port already in use:**
+**3. Port already in use:**
+
 Use a different host port
 ```sh
 docker run -d -p 9090:80 --mount type=bind,source=/home/ubuntu/data,target=/usr/local/apache2/htdocs --name apache httpd:latest
 ```
 
-3. **Changes not reflecting:**
+**4. Changes not reflecting:**
 - Verify the correct directory is mounted
 - Check file permissions
 - Ensure browser cache is cleared
