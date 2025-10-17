@@ -8,6 +8,8 @@ services:
       - "91:80"                                     # Host port 91 → Container port 80
     volumes:
       - ./apache-data:/usr/local/apache2/htdocs     # Bind mount for Apache content
+    restart: unless-stopped
+
   nginx:
     image: nginx:latest                             # Nginx Server image
     container_name: nginx_server                    # Container name
@@ -15,3 +17,4 @@ services:
       - "92:80"                                     # Host port 92 → Container port 80
     volumes:
       - ./nginx-data:/usr/share/nginx/html          # Bind mount for Nginx content
+    restart: unless-stopped
