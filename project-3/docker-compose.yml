@@ -3,26 +3,32 @@ version: '3.8'
 services:
   drupal:
     build: .
+    image: drupal-bootstrap:v1.0
     container_name: drupal-app
     ports:
       - "8080:80"
     depends_on:
       - db
     volumes:
-      - drupal-data:/var/www/html
-    restart: always
+      - drupal-data:/var/www/html/themes/contrib/bootstrap
+    environment:
+      - DRUPAL_DATABASE_HOST=db
+      - DRUPAL_DATABASE_NAME=drupal
+      - DRUPAL_DATABASE_USERNAME=drupal
+      - DRUPAL_DATABASE_PASSWORD=root
+    restart: unless-stopped
 
   db:
     image: mariadb:11.8
     container_name: drupal-db
     environment:
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
-      MYSQL_ROOT_PASSWORD: root
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=drupal
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=root
     volumes:
       - db-data:/var/lib/mysql
-    restart: always
+    restart: unless-stopped
 
 volumes:
   drupal-data:

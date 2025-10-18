@@ -6,15 +6,11 @@ RUN apt-get update && \
     apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory for themes
-WORKDIR /var/www/html/themes
-
 # Clone the official Bootstrap theme
-RUN git clone --branch 8.x-4.x --single-branch --depth 1 \
-    https://git.drupalcode.org/project/bootstrap.git
+RUN mkdir -p /var/www/html/themes/contrib && \
+    git clone --branch 8.x-4.x --single-branch --depth 1 \
+    https://git.drupalcode.org/project/bootstrap.git \
+    /var/www/html/themes/contrib/bootstrap
 
 # Fix permissions for web user
-RUN chown -R www-data:www-data bootstrap
-
-# Reset to Drupal root directory
-WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www/html/themes/contrib/bootstrap
