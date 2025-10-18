@@ -11,7 +11,7 @@ This project demonstrates a complete **multi-container application** deployment 
 - **MariaDB database** for robust data persistence
 - **Named volumes** for Drupal files and database storage
 - **Optimized Docker image** with reduced size and proper permissions
-- **Simple orchestration** via single docker-compose.yml file
+- **Simple orchestration** via single `docker-compose.yaml` file
 - **Production-ready** configuration with isolated networking
 
 
@@ -19,7 +19,7 @@ This project demonstrates a complete **multi-container application** deployment 
 Before starting, ensure you have:
 - Ubuntu-based system (local VM or cloud instance)
 - Docker Engine and Docker Compose installed
-- Minimum 2GB RAM and 10GB disk space
+- Basic understanding of YAML syntax
 - Sudo privileges on the target machine
 
 ### Required Ports
@@ -157,7 +157,7 @@ You will be redirected to the Drupal installation wizard automatically.
 Complete the following steps to configure your Drupal site:
 
 ### Step 1: Choose Language
-- Select your preferred installation language (English is recommended).
+- Select your preferred installation language (**English** is recommended).
 - Click **Save and continue**.
 
 ### Step 2: Choose Installation Profile
@@ -176,7 +176,7 @@ Drupal will automatically check system requirements. If all checks pass, you'll 
 | Database type | MariaDB, MySQL, or equivalent |
 | Database name | `drupal` |
 | Database username | `drupal` |
-| Database password | `drupal` |
+| Database password | `root` |
 
 #### Advanced Options:
 Click **Advanced Options** and enter:
@@ -352,7 +352,7 @@ sudo docker compose config
 **Solution:**
 ```sh
 # Check if theme exists in container
-sudo docker exec drupal_web ls -la /var/www/html/themes/contrib/
+sudo docker exec drupal-app ls -la /var/www/html/themes/contrib/
 
 # Rebuild image if missing
 sudo docker compose build --no-cache
@@ -380,9 +380,9 @@ ports:
 **Solution:**
 ```sh
 # Fix permissions inside container
-sudo docker exec drupal_web chown -R www-data:www-data /var/www/html
+sudo docker exec drupal-app chown -R www-data:www-data /var/www/html
 
-sudo docker exec drupal_web chmod -R 755 /var/www/html
+sudo docker exec drupal-app chmod -R 755 /var/www/html
 ```
 
 ### 5. Volume Data Not Persisting

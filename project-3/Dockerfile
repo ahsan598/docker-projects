@@ -1,5 +1,5 @@
 # Base Image
-FROM drupal:10-apache
+FROM drupal:10-apache-alpine
 
 # Install Git (to clone the theme)
 RUN apt-get update && \

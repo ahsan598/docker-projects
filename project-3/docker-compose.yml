@@ -10,12 +10,14 @@ services:
     depends_on:
       - db
     volumes:
-      - drupal-data:/var/www/html/themes/contrib/bootstrap
+      - drupal-theme-data:/var/www/html/themes/contrib/bootstrap
     environment:
       - DRUPAL_DATABASE_HOST=db
       - DRUPAL_DATABASE_NAME=drupal
       - DRUPAL_DATABASE_USERNAME=drupal
       - DRUPAL_DATABASE_PASSWORD=root
+    networks:
+      - drupal-network
     restart: unless-stopped
 
   db:
@@ -27,9 +29,18 @@ services:
       - MYSQL_USER=drupal
       - MYSQL_PASSWORD=root
     volumes:
-      - db-data:/var/lib/mysql
+      - drupal-database:/var/lib/mysql
+    networks:
+      - drupal-network
     restart: unless-stopped
 
 volumes:
-  drupal-data:
-  db-data:
+  drupal-theme-data:              # Ye exact name use hoga
+    name: drupal-theme-volume     # Optional: override with explicit name
+  drupal-database:
+    name: drupal-db-volume
+
+networks:
+  drupal-network:
+    name: drupal-net              # Custom network name
+    driver: bridge
