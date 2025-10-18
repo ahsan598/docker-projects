@@ -164,6 +164,9 @@ sudo docker compose down
 # Restart containers
 sudo docker compose up -d
 
+# Stop and remove everything including volumes
+sudo docker compose down -v
+
 # View logs from all services
 sudo docker compose logs
 
