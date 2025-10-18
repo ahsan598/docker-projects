@@ -152,23 +152,38 @@ sudo docker system df
 
 ## Docker Compose Commands
 ```sh
-# Start services defined in docker-compose.yml
+# Start all services
 sudo docker compose up -d
 
-# Stop and remove containers
+# Stop all services (keeps containers)
+sudo docker compose stop
+
+# Stop and remove all containers
 sudo docker compose down
 
-# View running services
-sudo docker compose ps
+# Restart containers
+sudo docker compose up -d
 
-# View service logs
+# View logs from all services
+sudo docker compose logs
+
+# Follow logs in real-time
 sudo docker compose logs -f
 
-# Rebuild and restart services
-sudo docker compose up -d --build
+# View logs for specific service
+sudo docker compose logs apache
 
-# Stop services without removing containers
-sudo docker compose stop
+# View resource usage
+sudo docker compose stats
+
+# Restart all services
+sudo docker compose restart
+
+# Rebuild images (if Dockerfile added later)
+sudo docker compose up --build -d
+
+# Scale a service (run multiple instances)
+sudo docker compose up -d --scale nginx=3
 ```
 
 

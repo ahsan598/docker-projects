@@ -142,39 +142,6 @@ echo '<h1>Updated Nginx Content!</h1>' > nginx-data/index.html
 
 ## Container Management
 
-### Essential Docker Compose Commands
-```sh
-# Start all services
-sudo docker compose up -d
-
-# Stop all services (keeps containers)
-sudo docker compose stop
-
-# Stop and remove all containers
-sudo docker compose down
-
-# Restart containers
-sudo docker compose up -d
-
-# View logs from all services
-sudo docker compose logs
-
-# Follow logs in real-time
-sudo docker compose logs -f
-
-# View logs for specific service
-sudo docker compose logs apache
-
-# Restart all services
-sudo docker compose restart
-
-# Rebuild images (if Dockerfile added later)
-sudo docker compose up --build -d
-
-# Scale a service (run multiple instances)
-sudo docker compose up -d --scale nginx=3
-```
-
 ### Service-Specific Commands
 ```sh
 # Start only Apache
@@ -217,7 +184,7 @@ sudo docker compose stats
 
 ## Troubleshooting
 
-### Port Conflicts
+### 1. Port Conflicts
 - Check if ports are already in use
 ```sh
 sudo netstat -tlnp | grep ':91|:92'
@@ -225,7 +192,7 @@ sudo netstat -tlnp | grep ':91|:92'
 - Change ports in docker-compose.yml
 ports: `8091:80` # Use different host port
 
-### Permission Issues
+### 2. Permission Issues
 - Fix directory permissions
 ```sh
 sudo chmod -R 755 apache-data nginx-data
@@ -235,7 +202,7 @@ sudo chmod -R 755 apache-data nginx-data
 ls -la apache-data/ nginx-data/
 ```
 
-### Container Won't Start
+### 3. Container Won't Start
 - View detailed logs
 ```sh
 sudo docker compose logs apache
@@ -246,7 +213,7 @@ sudo docker compose logs nginx
 sudo docker compose ps -a
 ```
 
-### Changes Not Reflecting
+### 4. Changes Not Reflecting
 - Verify bind mount paths in `docker-compose.yml`
 - Ensure files are in the correct directories
 - Clear browser cache (Ctrl+Shift+R)
@@ -313,6 +280,6 @@ apache:
 
 ## Additional Resources
 
-- **[Docker Compose Documentation](https://docs.docker.com/compose/):** Official reference for Compose file syntax, commands, and configuration options.
+- **[Docker Compose Documentation](https://docs.docker.com/compose/):** Official reference for compose file syntax, commands, and configuration options.
 - **[Apache httpd](https://httpd.apache.org/docs/):** Configuration guides, modules reference, and best practices.
 - **[Nginx Documentation](https://nginx.org/en/docs/):** Official guide for server configuration, performance tuning, and optimization.
