@@ -4,8 +4,8 @@ This repository contains multiple docker-based projects for learning and demonst
 
 ## 📂 Projects Included
 - [Project 1: Containerized Web Deployment with Apache and Bind Mounts](/project-1/)
-- [Project 2: Deploy Apache & Nginx Containers using Docker Compose](/project-2/)
-- [Project 3: Drupal & MariaDB using Docker Compose](/project-3/)
+- [Project 2: Multi-Container Web Deployment with Docker Compose](/project-2/)
+- [Project 3: Drupal CMS with MariaDB using Docker Compose](/project-3/)
 
 
 ## Docker Commands
