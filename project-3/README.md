@@ -242,6 +242,7 @@ Log in with your admin credentials.
 2. From the dropdown menu, click "**Appearance**"
    
 Once on the Appearance page:
+
 3. Scroll down to the "**Uninstalled themes**" section
 4. Locate "**Bootstrap**" in the available themes list
 5. Click "**Install**" button next to Bootstrap theme
