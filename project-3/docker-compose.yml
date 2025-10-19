@@ -42,5 +42,5 @@ volumes:
 
 networks:
   drupal-network:
-    name: drupal-net              # Custom network name
+    name: drupal-backend-network # Custom network name
     driver: bridge

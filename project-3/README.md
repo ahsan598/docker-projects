@@ -226,11 +226,6 @@ Congratulations! Your Drupal site is now installed and ready to use.
 
 You'll be automatically logged in to the admin dashboard.
 
-**Next steps:**
-- Apply the Bootstrap theme (see next section)
-- Create your first content
-- Configure site settings
-
 
 ## Apply Bootstrap Theme
 
