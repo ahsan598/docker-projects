@@ -15,7 +15,7 @@ services:
       - DRUPAL_DATABASE_HOST=db
       - DRUPAL_DATABASE_NAME=drupal
       - DRUPAL_DATABASE_USERNAME=drupal
-      - DRUPAL_DATABASE_PASSWORD=root
+      - DRUPAL_DATABASE_PASSWORD=drupal
     networks:
       - drupal-network
     restart: unless-stopped

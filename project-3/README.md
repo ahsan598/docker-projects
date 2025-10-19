@@ -233,28 +233,33 @@ You'll be automatically logged in to the admin dashboard.
 ```sh
 http://<YOUR_HOST_IP>:8080/user/login
 ```
-
 Log in with your admin credentials.
 
-### Step 2: Navigate to Appearance
 
-1. Click **Appearance** in the admin toolbar
-2. Locate **Bootstrap** in the available themes list
-3. Click **Install** next to Bootstrap theme
-4. Click **Install and set as default**
+### Step 2: Install & Apply Bootstrap Theme
+
+1. In the admin toolbar at the top, click "**Manage**"
+2. From the dropdown menu, click "**Appearance**"
+   
+Once on the Appearance page:
+3. Scroll down to the "**Uninstalled themes**" section
+4. Locate "**Bootstrap**" in the available themes list
+5. Click "**Install**" button next to Bootstrap theme
+6. After installation completes, click "**Install and set as default**"
+
 
 ### Step 3: Configure Theme (Optional)
 
 Customize your site's appearance:
 
-1. Go to **Appearance** → **Settings**
-2. Click **Bootstrap** theme settings
-3. Customize:
+1. Go to "**Manage**" → "**Appearance**"
+2. Click "**Settings**" next to Bootstrap theme
+3. Configure options:
    - **Color scheme** (primary, secondary colors)
    - **Layout options** (sidebar position, width)
    - **Typography** (font families, sizes)
    - **Component settings** (navbar style, button styles)
-
+4. Click "**Save configuration**"
 
 ## Theme Comparison:
 **Before Applying Bootstrap Theme**
